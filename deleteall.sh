@@ -1,5 +1,5 @@
 #!/bin/bash
-#David Benjamin Ayala Giralt
+#darkgordon
 cd istio-1.11.4
 PATH=$PWD/bin:$PATH
 echo $PATH | grep istio
@@ -8,4 +8,4 @@ istioctl manifest generate --set profile=demo | kubectl delete --ignore-not-foun
 istioctl tag remove apps
 kubectl delete namespace istio-system
 kubectl delete namespace apps
-cd --
+cd ..
