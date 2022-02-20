@@ -17,7 +17,7 @@ echo "Installing demo profile, read documentation for more profile references"
 istioctl install --set profile=demo -y
 
 echo "-------------Deploying kubernetes apps -V4.0-------------"
-echo "waiting 10 to deploy de python apps "
+echo "waiting 10 to deploy de python   apps "
 sleep 10
 cd $HOME/istio
 echo "try to create ns"
