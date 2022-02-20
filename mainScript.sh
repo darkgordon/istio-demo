@@ -22,7 +22,6 @@ kubectl create ns apps
 kubectl apply -f python_svc.yaml
 for x in 1 2 3 4 5; do sleep 2 &&  kubectl get svc,pods -n apps ; done
 echo "-------------Deploying kubernetes apps -V4.1-------------"
-cd ..
 echo "try to create ns"
 kubectl apply -f python_svc2.yaml
 for x in 1 2 3 4 5; do sleep 2 &&  kubectl get svc,pods -n apps ; done
@@ -39,7 +38,6 @@ echo "Creating kiali deployment"
 kubectl apply -f istio-1.11.4/samples/addons/kiali.yaml
 echo "Review ingressGateway External ip"
 kubectl get svc -n istio-system istio-ingressgateway
-cd ..
 echo "Creating custom ingress gateway and virtualservice to kiali"
 kubectl apply -f kiali_gateway_ingress.yaml
 sleep 3
