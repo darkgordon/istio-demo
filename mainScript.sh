@@ -2,9 +2,6 @@
 #darkgordon
 
 #Downloading istio and installing as demo profile  
-echo "Creating new dir for istio demos"
-mkdir $HOME/istio
-cd $HOME/istio
 echo "Downloading istioctl "
 echo "Recommended version 1.11.4"
 curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.11.4 TARGET_ARCH=x86_64 sh -
@@ -19,13 +16,13 @@ istioctl install --set profile=demo -y
 echo "-------------Deploying kubernetes apps -V4.0-------------"
 echo "waiting 10 to deploy de python   apps "
 sleep 10
-cd $HOME/istio
+cd ..
 echo "try to create ns"
 kubectl create ns apps 
 kubectl apply -f python_svc.yaml
 for x in 1 2 3 4 5; do sleep 2 &&  kubectl get svc,pods -n apps ; done
 echo "-------------Deploying kubernetes apps -V4.1-------------"
-cd $HOME/istio
+cd ..
 echo "try to create ns"
 kubectl apply -f python_svc2.yaml
 for x in 1 2 3 4 5; do sleep 2 &&  kubectl get svc,pods -n apps ; done
@@ -42,7 +39,7 @@ echo "Creating kiali deployment"
 kubectl apply -f istio-1.11.4/samples/addons/kiali.yaml
 echo "Review ingressGateway External ip"
 kubectl get svc -n istio-system istio-ingressgateway
-cd $HOME/istio
+cd ..
 echo "Creating custom ingress gateway and virtualservice to kiali"
 kubectl apply -f kiali_gateway_ingress.yaml
 sleep 3
