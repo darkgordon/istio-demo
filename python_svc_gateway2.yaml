@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: python2-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway 
+  servers:
+  - port:
+      number: 80
+      name: http-python
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: python2-gateway
+  namespace: istio-system 
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - python1-gateway
+  http:
+  - match: 
+    - uri:
+        prefix: "/python4.1"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: python-service-deployment-2.apps.svc.cluster.local
+        port:
+          number: 5003
+    

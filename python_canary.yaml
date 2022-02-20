@@ -1,0 +1,44 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: python-weights-canary
+  namespace: istio-system 
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - general-python-gateway
+  http:
+  - match: 
+    - uri:
+        prefix: "/python"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: python-service-deployment.apps.svc.cluster.local
+        port:
+          number: 5003
+        subset: v40
+      weight: 90
+    - destination:
+        host: python-service-deployment.apps.svc.cluster.local
+        port:
+          number: 5003
+        subset: v41
+      weight: 10
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: python-weights
+  namespace: istio-system
+spec:
+  host: python-service-deployment.apps.svc.cluster.local
+  subsets:
+  - name: v40
+    labels:
+      version: v40
+  - name: v41
+    labels:
+      version: v41
