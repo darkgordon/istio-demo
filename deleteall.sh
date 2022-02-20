@@ -8,3 +8,4 @@ istioctl manifest generate --set profile=demo | kubectl delete --ignore-not-foun
 istioctl tag remove apps
 kubectl delete namespace istio-system
 kubectl delete namespace apps
+cd --
