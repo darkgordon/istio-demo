@@ -1,7 +1,7 @@
 #!/bin/bash
 #darkgordon
 
-#Downloading istio and installing as default profile  
+#Downloading istio and installing as demo profile  
 echo "Creating new dir for istio demos"
 mkdir $HOME/istio
 cd $HOME/istio
